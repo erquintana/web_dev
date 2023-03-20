@@ -1,0 +1,30 @@
+<canvas id="canvas1" width="400" height="400" style="border:solid"></canvas>
+
+<script>
+    const cvas = document.getElementById("canvas1");
+    const ctx = cvas.getContext('2d');
+
+    const minX = 100;
+    const rangeX = 200;
+    const minRad = 10;
+    const radRange = 20;
+    let p = 0;
+    let sign = 1;
+
+    animate();
+
+    function animate() {
+        const x = minX + rangeX * p*Math.log(Math.E);
+        const rad = minRad + radRange * Math.sin(p*Math.PI)*Math.E
+        p = p + 0.02 * sign;
+        if (p > 1 || p < 0) {
+            sign = -sign;
+        }
+        ctx.clearRect(0, 0, cvas.width, cvas.height)
+        ctx.beginPath();
+        ctx.arc(x, 200, rad, 0, Math.PI * 2);
+        ctx.stroke();
+
+        requestAnimationFrame(animate);
+    }
+</script>
